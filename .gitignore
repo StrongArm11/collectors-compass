@@ -1,0 +1,9 @@
+build/
+exefs/
+__pycache__/
+*.zs
+*.bin
+*.nso
+*.sav
+*.log
+*.ini
