@@ -53,6 +53,18 @@ folder, delete that `romfs` folder: it is no longer needed.
 - **Screens**: tested docked (2560x1440) and handheld (1920x1080), with and without Lichii's Max Resolution patch,
   and at 1x, 1.5x and 3x resolution scale.
 
+  HOW TO INSTALL
+1. Download Collectors-Compass-v1.0.0.zip and unzip it. You get a folder named Collectors-Compass.
+2. Close the game.
+3. In Lichii, right-click Ocarina of Time in your game list and choose Open Mod Data Location.
+4. Copy the whole Collectors-Compass folder into the window that opens. Inside it, exefs must hold subsdk9 and E0F3CCFAF50065AE4EA01EB5AEB13B1A45DA3348.ips.
+5. If you've turned mods off in the game's add-on settings, make sure Collectors-Compass is on. Turn off any other mod that also uses subsdk9.
+6. Start the game. On the pause map, press L + R together to open the settings; tilt the right stick to pick an icon for hints.
+
+TO UNINSTALL: close the game and delete the Collectors-Compass folder.
+
+Needs game version 1.1.1 (build ID E0F3CCFAF50065AE4EA01EB5AEB13B1A45DA3348).
+
 ## Known limits
 
 - Silver Rupee rooms in Gerudo Training Ground (3) and Ganon's Castle (4) have no map position yet, so no icon.
