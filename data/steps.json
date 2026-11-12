@@ -1,0 +1,841 @@
+{
+ "KOK-1": [
+  "Go to Kokiri Forest as child Link at night.",
+  "Look for it: Behind the Know-It-All Brothers' house (southwest).",
+  "Kill it with your sword and pick up the token.",
+  "Kill, then touch the token (Boomerang if out of reach)."
+ ],
+ "KOK-2": [
+  "Go to Kokiri Forest as child Link.",
+  "Look for it: Soft soil behind the shop.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token."
+ ],
+ "KOK-3": [
+  "Go to Kokiri Forest as adult Link at night.",
+  "Look for it: Back of the House of the Twins (southeast), on a branch.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "LW-1": [
+  "Go to Lost Woods as child Link.",
+  "Look for it: Soft soil past the Skull Kid room (from Kokiri entrance: left, left).",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token."
+ ],
+ "LW-2": [
+  "Go to Lost Woods as child Link.",
+  "Look for it: Soft soil in the two-Scrubs room (right, left, right, left, left).",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token.",
+  "Magic Bean optional here."
+ ],
+ "LW-3": [
+  "Go to Lost Woods (plant as child, come back as adult).",
+  "Look for it: Bean plant in the same Scrubs room: plant as child, ride it as adult.",
+  "Plant a Magic Bean in the soft soil as child; come back as adult and ride the plant to it."
+ ],
+ "SFM-1": [
+  "Go to Sacred Forest Meadow as adult Link at night.",
+  "Look for it: High east wall above the maze (climb the maze wall).",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "HF-1": [
+  "Go to Hyrule Field as child Link at night.",
+  "Look for it: Lone tree on the hill between the Kokiri exit and Lon Lon Ranch: roll into it.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "HF-2": [
+  "Go to Hyrule Field.",
+  "Look for it: Grotto in the woods south of Lon Lon Ranch: bomb the cracked wall to open it.",
+  "Bring Bombs, Boomerang or Hookshot or Longshot: use it to reach the Skulltula or pull in its token.",
+  "Token is on a wall: you must retrieve it with Boomerang (child) or Hookshot/Longshot (adult). Matches your report."
+ ],
+ "HF-3": [
+  "Go to Hyrule Field (first as child, then again as adult).",
+  "Look for it: Marshland grotto: bomb the entrance, smash the crate; kill the normal Skulltula as a child, then return as an adult.",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "MKT-1": [
+  "Go to Hyrule Castle Town as child Link.",
+  "Look for it: Market guard house: roll into the wiggling crate in the back room.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "CAS-1": [
+  "Go to Hyrule Castle grounds as child Link at night.",
+  "Look for it: Tree right of the vines up to the castle: roll into it.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "CAS-2": [
+  "Go to Hyrule Castle grounds as child Link.",
+  "Look for it: Storm grotto near the tree where Talon sleeps.",
+  "Bring Song of Storms, Boomerang or Bombs: use it to reach the Skulltula or pull in its token.",
+  "Sources differ on what finishes it (Boomerang or Bombs)."
+ ],
+ "CAS-3": [
+  "Go to Castle Town ruins as adult Link.",
+  "Look for it: Back of a collapsed building near Ganon's Castle (adult end game).",
+  "Bring Hookshot or Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "LLR-1": [
+  "Go to Lon Lon Ranch as child Link.",
+  "Look for it: Tree behind the Super Cucco building: roll into it.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "LLR-2": [
+  "Go to Lon Lon Ranch as child Link at night.",
+  "Look for it: House window (left of the archway to the horse area).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "LLR-3": [
+  "Go to Lon Lon Ranch as child Link at night.",
+  "Look for it: Storage building / ruined building in the southwest (vines above crates).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "KAK-1": [
+  "Go to Kakariko Village as child Link at night.",
+  "Look for it: Construction site: walk the raised planks.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "KAK-2": [
+  "Go to Kakariko Village as child Link.",
+  "Look for it: Tree near the village entrance: roll into it.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "KAK-3": [
+  "Go to Kakariko Village as child Link at night.",
+  "Look for it: Wall by the House of Skulltula / cursed family's house.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "KAK-4": [
+  "Go to Kakariko Village as child Link at night.",
+  "Look for it: Watchtower ladder.",
+  "Bring Slingshot or Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "KAK-5": [
+  "Go to Kakariko Village as child Link at night.",
+  "Look for it: House wall in the northwest corner next to the Death Mountain Trail entrance.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "KAK-6": [
+  "Go to Kakariko Village as adult Link at night.",
+  "Look for it: Impa's House roof: hookshot up the vines, jump onto the roof.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "GRV-1": [
+  "Go to Kakariko Graveyard as child Link.",
+  "Look for it: Soft soil patch near the entrance.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token."
+ ],
+ "GRV-2": [
+  "Go to Kakariko Graveyard as child Link at night.",
+  "Look for it: Wall behind Dampe's hut.",
+  "Bring Boomerang or Hookshot or Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "DMT-1": [
+  "Go to Death Mountain Trail as child Link.",
+  "Look for it: Soft soil beside the Dodongo's Cavern entrance (clear the rocks first).",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token."
+ ],
+ "DMT-2": [
+  "Go to Death Mountain Trail.",
+  "Look for it: Bombable wall on the path back toward Kakariko.",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token.",
+  "Confirmed in-game: collected during the day."
+ ],
+ "DMT-3": [
+  "Go to Death Mountain Trail as adult Link.",
+  "Look for it: Boulder just outside the Goron City entrance.",
+  "Bring Megaton Hammer: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "DMT-4": [
+  "Go to Death Mountain Trail as adult Link.",
+  "Look for it: Boulder on the path up to the Crater / summit.",
+  "Bring Megaton Hammer: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "CRA-1": [
+  "Go to Death Mountain Crater as child Link.",
+  "Look for it: Crates just inside the crater entrance (next to the Fairy Fountain).",
+  "Kill it with your sword and pick up the token.",
+  "Heat damage: arrive at full health and be quick."
+ ],
+ "CRA-2": [
+  "Go to Death Mountain Crater as child Link.",
+  "Look for it: Soft soil reached by warping with the Bolero of Fire.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token.",
+  "Magic Bean optional."
+ ],
+ "GOR-1": [
+  "Go to Goron City as child Link.",
+  "Look for it: Crate at the back of the boulder room on the west side.",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "GOR-2": [
+  "Go to Goron City as adult Link.",
+  "Look for it: Ceiling / back of the central platform, via the rope bridges.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "ZRV-1": [
+  "Go to Zora's River as child Link.",
+  "Look for it: Soft soil beside the Magic Bean seller.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token.",
+  "Magic Bean optional."
+ ],
+ "ZRV-2": [
+  "Go to Zora's River as child Link at night.",
+  "Look for it: Bottom of the area, near the Domain waterfall (platform / ladder / vines).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "ZRV-3": [
+  "Go to Zora's River (plant as child, come back as adult) at night.",
+  "Look for it: Bean plant: plant as child by the bean seller, ride it as adult.",
+  "Plant a Magic Bean in the soft soil as child; come back as adult and ride the plant to it."
+ ],
+ "ZRV-4": [
+  "Go to Zora's River as adult Link at night.",
+  "Look for it: High wall near the top of the river / past the last bridge before the Domain.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "ZDM-1": [
+  "Go to Zora's Domain as adult Link.",
+  "Look for it: High on the wall at the top of the frozen waterfall.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "ZFN-1": [
+  "Go to Zora's Fountain as child Link.",
+  "Look for it: Thin tree on the south / southeast bank: roll into it.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "ZFN-2": [
+  "Go to Zora's Fountain as child Link at night.",
+  "Look for it: Wall by the sunken archway / log (after Jabu-Jabu's Belly).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "ZFN-3": [
+  "Go to Zora's Fountain as adult Link at night.",
+  "Look for it: Southeast: lift the silver boulder, drop down, use the Lens in the grotto.",
+  "Bring Silver Gauntlets, Lens of Truth, Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "LHY-1": [
+  "Go to Lake Hylia as child Link.",
+  "Look for it: Soft soil outside the Lakeside Laboratory.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token.",
+  "Magic Bean optional."
+ ],
+ "LHY-2": [
+  "Go to Lake Hylia as child Link at night.",
+  "Look for it: Side of the Laboratory, seen from the bridge.",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "LHY-3": [
+  "Go to Lake Hylia as child Link.",
+  "Look for it: Far south-west point of the lake: swim there and crawl through the gap in the small outcrop.",
+  "Kill it with your sword and pick up the token.",
+  "Guarded by a Blue Tektite."
+ ],
+ "LHY-4": [
+  "Go to Lake Hylia as adult Link at night.",
+  "Look for it: Top of the tree trunk in the centre of the lake (after the Water Temple).",
+  "Bring Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "LHY-5": [
+  "Go to Lake Hylia as adult Link.",
+  "Look for it: Bottom of the Laboratory's water tank (crate).",
+  "Bring Iron Boots, Hookshot or Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "GER-1": [
+  "Go to Gerudo Valley as child Link at night.",
+  "Look for it: Wall by the small plank bridge on entering.",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "GER-2": [
+  "Go to Gerudo Valley as child Link.",
+  "Look for it: Soft soil below the main bridge, reached by gliding down with a Cucco.",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token."
+ ],
+ "GER-3": [
+  "Go to Gerudo Valley as adult Link at night.",
+  "Look for it: Behind the carpenters' tent.",
+  "Bring Longshot or Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "GER-4": [
+  "Go to Gerudo Valley as adult Link at night.",
+  "Look for it: Rock arch south of the tent.",
+  "Bring Longshot or Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "GFT-1": [
+  "Go to Gerudo's Fortress as adult Link at night.",
+  "Look for it: Rock wall above the fortress, northeast.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "GFT-2": [
+  "Go to Gerudo's Fortress as adult Link at night.",
+  "Look for it: Far northeast target at the horseback archery range.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "WST-1": [
+  "Go to Haunted Wasteland as adult Link.",
+  "Look for it: Basement of the small building (follow the flags).",
+  "Kill it with your sword and pick up the token.",
+  "No guide lists a tool."
+ ],
+ "COL-1": [
+  "Go to Desert Colossus as adult Link at night.",
+  "Look for it: Wall to the right of the Spirit Temple entrance, under the circling birds (adult, night).",
+  "Bring Hookshot or Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "COL-2": [
+  "Go to Desert Colossus as child Link.",
+  "Look for it: Soft soil left of the Spirit Temple entrance (warp with the Requiem of Spirit).",
+  "Release bugs from a bottle onto the soft soil; kill the Skulltula that crawls out and grab the token.",
+  "Magic Bean optional."
+ ],
+ "COL-3": [
+  "Go to Desert Colossus as adult Link at night.",
+  "Look for it: Ride a bean plant (planted as child) to the rock mound.",
+  "Plant a Magic Bean in the soft soil as child; come back as adult and ride the plant to it."
+ ],
+ "DEK-1": [
+  "Go to Inside the Deku Tree as child Link.",
+  "Look for it: Compass room: raise the platforms and cross left.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "DEK-2": [
+  "Go to Inside the Deku Tree as child Link.",
+  "Look for it: Basement vines (after the web drop).",
+  "Bring Slingshot, kill the Skulltula and grab the token."
+ ],
+ "DEK-3": [
+  "Go to Inside the Deku Tree as child Link.",
+  "Look for it: Basement grate, north side.",
+  "Bring Slingshot or Sword, kill the Skulltula and grab the token."
+ ],
+ "DEK-4": [
+  "Go to Inside the Deku Tree as child Link.",
+  "Look for it: West room behind the bombable wall in the basement (behind the Deku Baba).",
+  "Bring Deku Stick, Slingshot, kill the Skulltula and grab the token."
+ ],
+ "DOD-1": [
+  "Go to Dodongo's Cavern as child Link.",
+  "Look for it: Bombable wall by the first Baby Dodongo.",
+  "Bring Bombs or Baby Dodongo blast: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "DOD-2": [
+  "Go to Dodongo's Cavern as child Link.",
+  "Look for it: Vines / grating above the bomb-flower staircase.",
+  "Bring Slingshot, kill the Skulltula and grab the token."
+ ],
+ "DOD-3": [
+  "Go to Dodongo's Cavern as child Link.",
+  "Look for it: Upper north-east room with the Dodongos: after the shortcut to the ground floor, turn right and bomb the cracked wall.",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "DOD-4": [
+  "Go to Dodongo's Cavern as child Link.",
+  "Look for it: Bombable wall past the skull's mouth (Armos and Baby Dodongos).",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "DOD-5": [
+  "Go to Dodongo's Cavern as adult Link.",
+  "Look for it: Scarecrow ledge in the lure corridor.",
+  "Bring Scarecrow's Song, Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "JAB-1": [
+  "Go to Jabu-Jabu's Belly as child Link.",
+  "Look for it: Vines opposite the Dungeon Map chest.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "JAB-2": [
+  "Go to Jabu-Jabu's Belly as child Link.",
+  "Look for it: Ceiling of the room below the tentacle hole: drop through and look up right away (Boomerang).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "JAB-3": [
+  "Go to Jabu-Jabu's Belly as child Link.",
+  "Look for it: Wall further along from where you land, away from the hole (Boomerang).",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "JAB-4": [
+  "Go to Jabu-Jabu's Belly as child Link.",
+  "Look for it: Vines / pillar room before the boss.",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "FOR-1": [
+  "Go to Forest Temple as adult Link.",
+  "Look for it: Vines in the first room.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FOR-2": [
+  "Go to Forest Temple as adult Link.",
+  "Look for it: Central chamber wall, left of the north door.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FOR-3": [
+  "Go to Forest Temple as adult Link.",
+  "Look for it: Balcony after the boss-key hole, south ledge.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FOR-4": [
+  "Go to Forest Temple as adult Link.",
+  "Look for it: Ledge above the shortcut block.",
+  "Bring Scarecrow's Song, Hookshot, Fire Arrows: use it to reach the Skulltula or pull in its token."
+ ],
+ "FOR-5": [
+  "Go to Forest Temple as adult Link.",
+  "Look for it: Alcove in the rotating basement room.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FIR-1": [
+  "Go to Fire Temple as adult Link.",
+  "Look for it: Rising platform in the sinking-lava room.",
+  "Play Song of Time to open the way, then kill it and grab the token.",
+  "Defeat the Like Like and flying tiles."
+ ],
+ "FIR-2": [
+  "Go to Fire Temple as adult Link.",
+  "Look for it: Bombable wall in the rolling-boulder room.",
+  "Bring Bombs or Bomb Flower: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "FIR-3": [
+  "Go to Fire Temple as adult Link.",
+  "Look for it: Hidden upper room via the elevator.",
+  "Bring Scarecrow's Song, Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FIR-4": [
+  "Go to Fire Temple as adult Link.",
+  "Look for it: Continuing on from the previous one, above the lava.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "FIR-5": [
+  "Go to Fire Temple as adult Link.",
+  "Look for it: Rooms behind the entrance totem.",
+  "Bring Megaton Hammer, Small Key: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "ICE-1": [
+  "Go to Ice Cavern as adult Link.",
+  "Look for it: Spinning-blade room, southwest wall.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "ICE-2": [
+  "Go to Ice Cavern as adult Link.",
+  "Look for it: Compass room, to the right (northwest of the chest).",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "ICE-3": [
+  "Go to Ice Cavern as adult Link.",
+  "Look for it: Entrance of the sliding ice-block puzzle room.",
+  "Bring Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "WAT-1": [
+  "Go to Water Temple as adult Link.",
+  "Look for it: B1 room via the floating block (green water level).",
+  "Bring Zelda's Lullaby, Iron Boots, Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "WAT-2": [
+  "Go to Water Temple as adult Link.",
+  "Look for it: Whirlpool waterway, partway up.",
+  "Bring Longshot, Iron Boots: use it to reach the Skulltula or pull in its token."
+ ],
+ "WAT-3": [
+  "Go to Water Temple as adult Link.",
+  "Look for it: Top of the central tower.",
+  "Bring Longshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "WAT-4": [
+  "Go to Water Temple as adult Link.",
+  "Look for it: Boulder hallway with the waterfall (after the boss key).",
+  "Bring Longshot, Boss Key: use it to reach the Skulltula or pull in its token."
+ ],
+ "WAT-5": [
+  "Go to Water Temple as adult Link.",
+  "Look for it: Bombable wall in the blue room.",
+  "Bring Bombs: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "WEL-1": [
+  "Go to Bottom of the Well as child Link.",
+  "Look for it: East side: the Like Like room (Lens of Truth path) - the Skulltula is behind the Like Like.",
+  "Bring Lens of Truth, kill the Skulltula and grab the token."
+ ],
+ "WEL-2": [
+  "Go to Bottom of the Well as child Link.",
+  "Look for it: Western chamber of the central area: the locked room (burn the coffin to reveal it).",
+  "Bring Small Key, Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "WEL-3": [
+  "Go to Bottom of the Well as child Link.",
+  "Look for it: Locked room in the centre/east of the central chamber (small key).",
+  "Bring Small Key, Lens of Truth, Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "SHA-1": [
+  "Go to Shadow Temple as adult Link.",
+  "Look for it: Invisible scythe room, wall between the two chests.",
+  "Bring Lens of Truth, kill the Skulltula and grab the token.",
+  "Defeat the Like Like and fire keese."
+ ],
+ "SHA-2": [
+  "Go to Shadow Temple as adult Link.",
+  "Look for it: Top of the falling-spikes room (push the block).",
+  "Kill it with your sword and pick up the token."
+ ],
+ "SHA-3": [
+  "Go to Shadow Temple as adult Link.",
+  "Look for it: Fan corridor, behind you after the gap.",
+  "Bring Longshot or Hookshot, Iron Boots: use it to reach the Skulltula or pull in its token."
+ ],
+ "SHA-4": [
+  "Go to Shadow Temple as adult Link.",
+  "Look for it: Scarecrow spot via the block shortcut near the boat.",
+  "Bring Scarecrow's Song, Longshot or Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "SHA-5": [
+  "Go to Shadow Temple as adult Link.",
+  "Look for it: Room with the three skull pots.",
+  "Bring Bombs, Lens of Truth: break open the spot where it hides, then kill it and grab the token."
+ ],
+ "SPI-1": [
+  "Go to Spirit Temple as child Link.",
+  "Look for it: Corridor right before the Iron Knuckle room: solve the five silver-rupee (crystal) puzzle, go through the door that opens and turn around.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "SPI-2": [
+  "Go to Spirit Temple as child Link.",
+  "Look for it: Right of the statue, from the Dungeon Map chest.",
+  "Kill it with your sword and pick up the token."
+ ],
+ "SPI-3": [
+  "Go to Spirit Temple as child Link.",
+  "Look for it: First room on the right as a child: on the grating, past the sun / sliding-block puzzle; look behind you above the door.",
+  "Bring Boomerang: use it to reach the Skulltula or pull in its token."
+ ],
+ "SPI-4": [
+  "Go to Spirit Temple as adult Link.",
+  "Look for it: Alcove in the rolling-boulder crystal room (blue block).",
+  "Play Song of Time to open the way, then kill it and grab the token."
+ ],
+ "SPI-5": [
+  "Go to Spirit Temple as adult Link.",
+  "Look for it: Ledge by the giant statue room.",
+  "Bring Scarecrow's Song, Longshot or Hookshot: use it to reach the Skulltula or pull in its token."
+ ],
+ "H-LW1": [
+  "Go to Lost Woods as child Link.",
+  "Ocarina memory game with the Skull Kids on the stumps (first right from the Kokiri entrance).",
+  "Bring Ocarina.",
+  "Copy their tunes for three rounds."
+ ],
+ "H-LW2": [
+  "Go to Lost Woods as child Link.",
+  "Play Saria's Song for the Skull Kid on the stump (first left from the Kokiri entrance).",
+  "Bring Saria's Song."
+ ],
+ "H-HF1": [
+  "Go to Hyrule Field (first as child, then again as adult).",
+  "Chest under the big rocks by the Gerudo Valley road: read the Fairy Note there as an adult, then open the chest as a child.",
+  "The note is only readable as an adult; the chest opens for young Link."
+ ],
+ "H-HF2": [
+  "Go to Hyrule Field (first as child, then again as adult).",
+  "Grotto scrub in the trees right of the Castle Town entrance: read the Fairy Note as an adult for the password, then bomb the ground and buy the piece.",
+  "Bring Bombs.",
+  "Costs Rupees."
+ ],
+ "H-LLR1": [
+  "Go to Lon Lon Ranch as child Link.",
+  "Storage building in the south-west of the ranch: push the crates to open the crawlspace."
+ ],
+ "H-LHY1": [
+  "Go to Lake Hylia as child Link.",
+  "Fishing pond: land a big fish as young Link.",
+  "The owner measures it; aim for 55 cm or more."
+ ],
+ "H-LHY2": [
+  "Go to Lake Hylia (plant as child, come back as adult).",
+  "Top of the Lakeside Laboratory: ride the bean plant (plant the bean as a child).",
+  "Bring Magic Bean."
+ ],
+ "H-LHY3": [
+  "Go to Lake Hylia.",
+  "Dive to the bottom of the laboratory pool without Iron Boots, then talk to the scientist.",
+  "Needs the Golden Scale."
+ ],
+ "H-MKT1": [
+  "Go to Hyrule Castle Town as child Link.",
+  "Bombchu Bowling: win the round whose prize is a Piece of Heart."
+ ],
+ "H-MKT2": [
+  "Go to Hyrule Castle Town as child Link at night.",
+  "Bring Richard, the white dog, back to the woman in the back alley.",
+  "Several white dogs roam at night; only one is Richard."
+ ],
+ "H-MKT3": [
+  "Go to Hyrule Castle Town as child Link at night.",
+  "Treasure Chest Shop: win the last room.",
+  "The Lens of Truth makes it easy."
+ ],
+ "H-KAK1": [
+  "Go to Kakariko Village.",
+  "Man stuck on the blue roof: fly there with the Cucco by the windmill and talk to him."
+ ],
+ "H-KAK2": [
+  "Go to Kakariko Village.",
+  "Cow pen inside Impa's house: drop in from the rooftops (ride the owl down from the mountain as a child)."
+ ],
+ "H-KAK3": [
+  "Go to Kakariko Village as adult Link.",
+  "Ledge inside the windmill.",
+  "After Damp\u00e9's race you come out here."
+ ],
+ "H-KAK4": [
+  "Go to Kakariko Village.",
+  "House of Skulltula: reward for 50 Gold Skulltula tokens."
+ ],
+ "H-GRV1": [
+  "Go to Kakariko Graveyard as child Link at night.",
+  "Damp\u00e9's gravedigging tour: keep digging until he finds something hard.",
+  "Each dig costs Rupees."
+ ],
+ "H-GRV2": [
+  "Go to Kakariko Graveyard as child Link at night.",
+  "Grave with the ReDead: pull back the gravestone at night, drop in and play Sun's Song for the chest.",
+  "Bring Sun's Song."
+ ],
+ "H-GRV3": [
+  "Go to Kakariko Graveyard (plant as child, come back as adult).",
+  "High ledge reached by riding the bean plant (plant the bean as a child).",
+  "Bring Magic Bean."
+ ],
+ "H-GRV4": [
+  "Go to Kakariko Graveyard as adult Link.",
+  "Damp\u00e9's race: finish in under a minute (the second race).",
+  "The first race gives the Hookshot."
+ ],
+ "H-DMT1": [
+  "Go to Death Mountain Trail (plant as child, come back as adult).",
+  "Ledge above Dodongo's Cavern: ride the bean plant planted outside the cavern.",
+  "Bring Magic Bean."
+ ],
+ "H-GOR1": [
+  "Go to Goron City as child Link.",
+  "Light the torches to spin the big pot in the middle, then drop a bomb into it.",
+  "Bring Bombs.",
+  "Keep trying until the face shows the heart."
+ ],
+ "H-CRA1": [
+  "Go to Death Mountain Crater.",
+  "Lower ledge straight ahead from the Death Mountain Trail entrance: climb down to it.",
+  "Watch the heat timer."
+ ],
+ "H-CRA2": [
+  "Go to Death Mountain Crater (plant as child, come back as adult).",
+  "Rock spire by the warp point: ride the bean plant (plant the bean as a child).",
+  "Bring Magic Bean, Bolero of Fire."
+ ],
+ "H-CRA3": [
+  "Go to Death Mountain Crater as child Link.",
+  "Business Scrub on the lower ground left of the crater entrance sells it.",
+  "Costs Rupees."
+ ],
+ "H-ZRV1": [
+  "Go to Zora's River.",
+  "Pillar halfway up the river: carry the Cucco up, glide to the vines, then fly to the piece.",
+  "As an adult the Hover Boots work too."
+ ],
+ "H-ZRV2": [
+  "Go to Zora's River.",
+  "Ledge by the waterfall at the top of the river: keep the Cucco and glide across."
+ ],
+ "H-ZRV3": [
+  "Go to Zora's River as child Link.",
+  "Frogs on the log: play the Song of Storms.",
+  "Bring Song of Storms."
+ ],
+ "H-ZRV4": [
+  "Go to Zora's River as child Link.",
+  "Frogs on the log: play your other songs until every frog has grown.",
+  "Bring Ocarina."
+ ],
+ "H-ZDM1": [
+  "Go to Zora's Domain as child Link.",
+  "Light all the torches from the throne room down to the water; a chest appears.",
+  "Bring Deku Stick."
+ ],
+ "H-ZFN1": [
+  "Go to Zora's Fountain as adult Link.",
+  "Hop across the floating ice blocks."
+ ],
+ "H-ZFN2": [
+  "Go to Zora's Fountain as adult Link.",
+  "Bottom of the fountain near the Ice Cavern: sink with the Iron Boots.",
+  "Bring Iron Boots."
+ ],
+ "H-GER1": [
+  "Go to Gerudo Valley.",
+  "Small ledge left of the bridge: glide there with the Cucco from the entrance."
+ ],
+ "H-GER2": [
+  "Go to Gerudo Valley.",
+  "Behind the waterfall, north of the ledge."
+ ],
+ "H-GFT1": [
+  "Go to Gerudo's Fortress as adult Link.",
+  "Chest on the highest roof of the fortress.",
+  "Bring Hookshot."
+ ],
+ "H-GFT2": [
+  "Go to Gerudo's Fortress as adult Link.",
+  "Horseback archery: score 1,000 points or more.",
+  "Bring Fairy Bow.",
+  "Needs Epona."
+ ],
+ "H-COL1": [
+  "Go to Desert Colossus (plant as child, come back as adult).",
+  "Rock arch near the Spirit Temple: ride the bean plant (plant the bean as a child).",
+  "Bring Magic Bean."
+ ],
+ "POE-1": [
+  "As adult Link, ride to Hyrule Field: on the road south of the Castle Town drawbridge.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-2": [
+  "As adult Link, ride to Hyrule Field: between Castle Town and Lon Lon Ranch, north of the ranch.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-3": [
+  "As adult Link, ride to Hyrule Field: just south-west of the Castle Town drawbridge.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-4": [
+  "As adult Link, ride to Hyrule Field: north-west of Lon Lon Ranch.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-5": [
+  "As adult Link, ride to Hyrule Field: near the Gerudo Valley road, west of the ranch.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-6": [
+  "As adult Link, ride to Hyrule Field: west of Lon Lon Ranch, toward Gerudo Valley.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-7": [
+  "As adult Link, ride to Hyrule Field: south-west of Lon Lon Ranch, toward Lake Hylia.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-8": [
+  "As adult Link, ride to Hyrule Field: in the southern field, east of the Lake Hylia road.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-9": [
+  "As adult Link, ride to Hyrule Field: on the way to Kokiri Forest, south-east of the ranch.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "POE-10": [
+  "As adult Link, ride to Hyrule Field: east of Lon Lon Ranch.",
+  "Ride Epona through the spot until the Big Poe appears (on foot you may only get a small Poe).",
+  "Shoot it twice with the Fairy Bow before it flies off.",
+  "Get off and talk to its soul to catch it in an empty bottle.",
+  "Sell it to the Poe Collector, in the old guardhouse at the Castle Town entrance. Ten earn a bottle."
+ ],
+ "SR-WEL1": [
+  "Go down into the Bottom of the Well as child Link.",
+  "Take the way into the basement room under the centre of the well.",
+  "Use the Lens of Truth: some rupees sit behind fake walls or over hidden holes.",
+  "Collect all five silver rupees to open the gate."
+ ],
+ "SR-GTG1": [
+  "In Gerudo Training Ground: Room with the flowing water and Song of Time blocks.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-GTG2": [
+  "In Gerudo Training Ground: Room with the fire walls and pits.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-GTG3": [
+  "In Gerudo Training Ground: Lava room with Song of Time blocks.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-ICE1": [
+  "In the Ice Cavern (adult), go past the spinning-blade room and the Ice Keese.",
+  "Melt the red ice with Blue Fire to enter the room with the big ice block.",
+  "Push the block across the floor as a step to reach each rupee; push it off an edge to reset it.",
+  "All five open the door on the south side."
+ ],
+ "SR-ICE2": [
+  "In the Ice Cavern (adult), go past the Freezard room to the room with the spinning ice blade.",
+  "Run around the blade: three rupees are in the middle, one behind icicles (break them).",
+  "For the last one climb the far platforms and jump down toward the middle.",
+  "All five open the far doorway."
+ ],
+ "SR-GAN1": [
+  "In Ganon's Castle: Room with the sinking floors over lava.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-GAN2": [
+  "In Ganon's Castle: Room with the fans and the Beamos.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-GAN3": [
+  "In Ganon's Castle: Room with the rolling boulder.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-GAN4": [
+  "In Ganon's Castle: Room with the Armos statues and moving spikes.",
+  "Collect all five silver rupees in the room to open the way."
+ ],
+ "SR-SHA1": [
+  "In the Shadow Temple, go past the Beamos room and the Compass room.",
+  "Use the Lens of Truth: two invisible scythes spin around the room - roll under them.",
+  "Four rupees are on the floor; Hookshot up to the wooden ledge and jump off for the fifth.",
+  "All five open the way to a Small Key."
+ ],
+ "SR-SHA2": [
+  "In the Shadow Temple, go to the room with the falling spike blades and a Beamos.",
+  "Hover Boots help you cross; ride the rising platform when it comes up.",
+  "Collect the four rupees you can see, then bomb the Beamos to free the fifth.",
+  "All five open the way on."
+ ],
+ "SR-SHA3": [
+  "In the Shadow Temple, go through the Small Key door to the spike room with ReDeads.",
+  "Use the Lens of Truth to see the hidden ledges and Hookshot targets.",
+  "Hookshot between them to reach all five rupees; keep away from the ReDeads.",
+  "All five open the west doorway."
+ ],
+ "SR-SPI1": [
+  "In the Spirit Temple (child side), go to the room with the climbing net and the chest.",
+  "Collect the rupees on the floor; climb the net for the high ones.",
+  "Watch for the rolling boulder and the enemies while you run.",
+  "All five open the gate to the next room."
+ ],
+ "SR-SPI2": [
+  "In the Spirit Temple (child side), go to the room with the sun switch blocks, before the Iron Knuckle.",
+  "Push the blocks and use the sun switch to reach the rupees on the high spots.",
+  "All five open the way on."
+ ],
+ "SR-SPI3": [
+  "In the Spirit Temple (adult side), go to the room with the rolling boulders.",
+  "Play the Song of Time to move the block and time your runs between the boulders.",
+  "Collect all five to open the door."
+ ]
+}

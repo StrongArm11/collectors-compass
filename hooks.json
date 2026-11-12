@@ -1,0 +1,136 @@
+{
+  "_comment": "Hooked game routines and plain patches (offsets in main, build E0F3CCFA...). Each enabled hook's first word is replaced by a branch to a gate in unused space at the end of main's code; the gate jumps to our handler when the module has filled its table slot, otherwise it runs the original first word and continues. Disabled hooks keep their slot but patch nothing. Overlay sites from Fast Travel's game.hpp (MIT), checked against the dump. Import hooks (plt) wrap calls into the system libraries through main's import stubs.",
+  "cave": "0x3C46C00",
+  "table": "0x4E9E000",
+  "hooks": [
+    {
+      "name": "LoadGraphicsProcs",
+      "enabled": true,
+      "what": "graphics function table load: (device, lookup)",
+      "site": "0x129E290",
+      "words": [
+        "0xD503237F",
+        "0xA9BE7BFD",
+        "0xA9014FF4",
+        "0x910003FD"
+      ]
+    },
+    {
+      "name": "DrawLayer",
+      "enabled": true,
+      "what": "draws one screen layer: (display, layer, sort key)",
+      "site": "0x4CD60",
+      "words": [
+        "0xD503237F",
+        "0xA9BA7BFD",
+        "0xA9016FFC",
+        "0xA90267FA"
+      ]
+    },
+    {
+      "name": "CollectIcons",
+      "enabled": true,
+      "what": "map icon manager: per-frame update of the Skulltula/heart icons (this)",
+      "site": "0x209040",
+      "words": [
+        "0xB9436808",
+        "0x7100051F",
+        "0x5400220B",
+        "0xD503237F"
+      ]
+    },
+    {
+      "name": "Decompress",
+      "enabled": true,
+      "what": "resource decompressor (zstd): (this, load arg, resource, u32* out size, u32* out alloc size, bool* allocated) -> buffer",
+      "site": "0xE8DA0",
+      "words": [
+        "0xD503237F",
+        "0xD10403FF",
+        "0xA90A7BFD",
+        "0xA90B6FFC"
+      ]
+    }
+  ],
+  "patches": [
+    {
+      "site": "0x2091D0",
+      "old": "0x34000488",
+      "new": "0x34000848",
+      "what": "Skulltula: empty save-key table -> show (cbz w8, #0x209260 -> cbz w8, #0x2092d8)"
+    },
+    {
+      "site": "0x20922C",
+      "old": "0x1400000D",
+      "new": "0x1400002B",
+      "what": "Skulltula: key not found -> show (b #0x209260 -> b #0x2092d8)"
+    },
+    {
+      "site": "0x20923C",
+      "old": "0x36000120",
+      "new": "0x37000120",
+      "what": "Heart: collected -> hide, otherwise show (tbz w0, #0, #0x209260 -> tbnz w0, #0, #0x209260)"
+    },
+    {
+      "site": "0x209248",
+      "old": "0x37F800CB",
+      "new": "0x37F8048B",
+      "what": "Skulltula: key not found -> show (tbnz w11, #0x1f, #0x209260 -> tbnz w11, #0x1f, #0x2092d8)"
+    },
+    {
+      "site": "0x20925C",
+      "old": "0x370003E8",
+      "new": "0x360003E8",
+      "what": "Skulltula: collected -> hide, otherwise show (tbnz w8, #0, #0x2092d8 -> tbz w8, #0, #0x2092d8)"
+    }
+  ],
+  "inline": [
+    {
+      "name": "CollectDecide",
+      "what": "per Skulltula/heart icon, before the game decides: decide(manager, index) -> 0 hide, 1 game's rule, 2 show",
+      "site": "0x2090AC",
+      "old": "0x34000DA8",
+      "args": [
+        "x19",
+        "x23"
+      ],
+      "continue": "0x2090B0",
+      "results": {
+        "0": "0x209260",
+        "2": "0x2092D8"
+      }
+    }
+  ],
+  "plt": [
+    {
+      "name": "NpadJoyDual",
+      "what": "nn::hid::GetNpadStates(NpadJoyDualState*, int, const NpadIdType&)",
+      "site": "0x3C427F0",
+      "got": "0x4CBF5C0"
+    },
+    {
+      "name": "NpadFullKey",
+      "what": "nn::hid::GetNpadStates(NpadFullKeyState*, int, const NpadIdType&)",
+      "site": "0x3C42800",
+      "got": "0x4CBF5C8"
+    },
+    {
+      "name": "NpadJoyLeft",
+      "what": "nn::hid::GetNpadStates(NpadJoyLeftState*, int, const NpadIdType&)",
+      "site": "0x3C42810",
+      "got": "0x4CBF5D0"
+    },
+    {
+      "name": "NpadJoyRight",
+      "what": "nn::hid::GetNpadStates(NpadJoyRightState*, int, const NpadIdType&)",
+      "site": "0x3C42820",
+      "got": "0x4CBF5D8"
+    },
+    {
+      "name": "NpadHandheld",
+      "what": "nn::hid::GetNpadStates(NpadHandheldState*, int, const NpadIdType&)",
+      "site": "0x3C42830",
+      "got": "0x4CBF5E0"
+    }
+  ]
+}
