@@ -30,13 +30,19 @@ and only if they match version 1.1.1 exactly.
 
 ## Install
 
-1. Close the game.
-2. In Lichii, right-click the game and choose **Open Mod Data Location**.
-3. Copy the `Collectors-Compass` folder there. Its `exefs` folder must contain `subsdk9` and
+1. Download the latest `Collectors-Compass-v*.zip` from the Releases page and unzip it. You get a folder named
+   `Collectors-Compass`.
+2. Close the game.
+3. In Lichii, right-click Ocarina of Time in your game list and choose **Open Mod Data Location**.
+4. Copy the whole `Collectors-Compass` folder into the window that opens. Inside it, `exefs` must hold `subsdk9` and
    `E0F3CCFAF50065AE4EA01EB5AEB13B1A45DA3348.ips`.
-4. Start the game.
+5. If you've turned mods off in the game's add-on settings, make sure Collectors-Compass is on. Turn off any other mod
+   that also uses `subsdk9`.
+6. Start the game. On the pause map, press **L + R** together to open the settings; tilt the **right stick** to pick
+   an icon for hints.
 
-To uninstall, close the game and delete the folder. If you used an earlier test version that had a `romfs`
+To update, replace the two files in `Collectors-Compass\exefs` with the new ones. To uninstall, close the game and
+delete the `Collectors-Compass` folder. If you used an earlier test version that had a `romfs`
 folder, delete that `romfs` folder: it is no longer needed.
 
 ## Compatibility
