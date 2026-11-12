@@ -48,9 +48,8 @@ folder, delete that `romfs` folder: it is no longer needed.
   takes its panel images (2 to 8 MB, depending on the screen) from the game's own spare heap later. With Hyrule
   Cheat Menu (about 36 MB) installed, roughly 2 to 4 MB is left for any further mods. Lichii always uses its
   12 GB Switch 2 memory layout for this game, so the memory setting doesn't change this.
-- **Map Shows Missing Collectibles** patch file: not needed with this mod (the same change is built in). Leave it off.
-- **Map Shows Missing Minigame Hearts** patch file: does something this mod doesn't (the heart badge on minigame
-  icons counts the hearts still to win). It wasn't tested together with this mod; leave it off unless you test it.
+- **Other map mods**: a mod that also changes which Gold Skulltula or Piece of Heart icons the pause map shows may
+  clash with this one. Use one or the other.
 - **Screens**: tested docked (2560x1440) and handheld (1920x1080), with and without Lichii's Max Resolution patch,
   and at 1x, 1.5x and 3x resolution scale.
 
