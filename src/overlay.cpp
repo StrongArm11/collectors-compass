@@ -12,6 +12,7 @@
 #include "overlay.hpp"
 
 #include "hooks.hpp"
+#include "menu.hpp"
 
 namespace mm {
 namespace {
@@ -419,35 +420,41 @@ void wrappedSetRenderTargets(u64 cmd, u64 count, u64 colors, u64 views, u64 dept
     s_realSetRenderTargets.load(std::memory_order_relaxed)(cmd, count, colors, views, depth, depthView, a6, a7);
 }
 
-GenericFn wrappedLookup(const void* device, const char* name) {
-    const GenericFn real = s_realLookup(device, name);
-    if (real == nullptr || name == nullptr) return real;
-    if (sameText(name, "nvnCommandBufferSetRenderTargets")) {
-        s_realSetRenderTargets.store(reinterpret_cast<Forward8Fn>(real));
-        return reinterpret_cast<GenericFn>(&wrappedSetRenderTargets);
+// Since v1.0.1 the graphics hooks avoid the spots other mods patch: the device and the function lookup come from the
+// renderer's nvnDeviceInitialize call, and the render-target bind is wrapped in the game's own function table after
+// the game has filled it (whatever another mod put there is called on from our wrapper).
+using DeviceInitFn = bool (*)(void* device, const void* builder);
+using DrawLayerFn = void (*)(void* display, void* layer, u32 key);
+DrawLayerFn s_origDrawLayer = nullptr;
+constexpr u32 kRenderTargetsVar = 0x4C8D9D0;   // main's pointer to the game's nvnCommandBufferSetRenderTargets variable
+
+bool onDeviceInit(void* device, const void* builder, DeviceInitFn initialize, LookupFn lookup) {
+    const bool ok = initialize(device, builder);
+    if (ok && lookup != nullptr && device != nullptr) {
+        s_realLookup = lookup;
+        s_device = device;
+        log("graphics device ready (%p)", device);
+        resolveApi();
     }
-    return real;
+    return ok;
 }
 
-using LoadGraphicsProcsFn = void (*)(const void* device, LookupFn lookup);
-using DrawLayerFn = void (*)(void* display, void* layer, u32 key);
-LoadGraphicsProcsFn s_origLoadGraphicsProcs = nullptr;
-DrawLayerFn s_origDrawLayer = nullptr;
-
-void onLoadGraphicsProcs(const void* device, LookupFn lookup) {
-    if (lookup == nullptr) {
-        log("graphics table load without a lookup function; left alone");
-        s_origLoadGraphicsProcs(device, lookup);
-        return;
-    }
-    s_realLookup = lookup;
-    if (device != nullptr) s_device = device;
-    s_origLoadGraphicsProcs(device, &wrappedLookup);
-    log("graphics table loaded (device %p): render-target bind %s", device, s_realSetRenderTargets.load() ? "wrapped" : "missing");
-    resolveApi();
+void chainRenderTargets() {
+    auto* const* holder = reinterpret_cast<Forward8Fn* const*>(g_main + kRenderTargetsVar);
+    Forward8Fn* var = *holder;
+    if (var == nullptr) return;
+    const Forward8Fn now = __atomic_load_n(var, __ATOMIC_ACQUIRE);
+    if (now == nullptr || now == &wrappedSetRenderTargets) return;
+    // Several drawing threads get here; only the one whose swap lands logs (the others saw the same old value).
+    s_realSetRenderTargets.store(now);
+    Forward8Fn expected = now;
+    if (__atomic_compare_exchange_n(var, &expected, &wrappedSetRenderTargets, false, __ATOMIC_ACQ_REL, __ATOMIC_ACQUIRE))
+        log("render-target bind wrapped (calls on to %p)", reinterpret_cast<void*>(now));
 }
 
 void onDrawLayer(void* display, void* layer, u32 key) {
+    chainRenderTargets();
+    inputTick();
     const LayerKind kind = layer != nullptr ? layerKind(layer) : LayerKind::Other;
     const std::uintptr_t thread = threadKey();
     ThreadSlot* slot = findSlot(thread);
@@ -476,10 +483,9 @@ void setPanel(bool visible, int width, int height, int x, int y, u32 version, Pa
 }
 
 bool installOverlay() {
-    // The original is stored before the handler goes live (installHook writes it first).
-    return installHook(kHookLoadGraphicsProcs, reinterpret_cast<void*>(&onLoadGraphicsProcs),
-                       reinterpret_cast<void**>(&s_origLoadGraphicsProcs)) &&
-           installHook(kHookDrawLayer, reinterpret_cast<void*>(&onDrawLayer), reinterpret_cast<void**>(&s_origDrawLayer));
+    // The original is stored before the handler goes live (installCall writes it first).
+    return installCall(kCallDeviceInit, reinterpret_cast<void*>(&onDeviceInit), nullptr) &&
+           installCall(kCallDrawLayer, reinterpret_cast<void*>(&onDrawLayer), reinterpret_cast<void**>(&s_origDrawLayer));
 }
 
 }  // namespace mm

@@ -29,5 +29,6 @@ void menuInput(u64 pressed);
 
 // Installs the controller hooks; false if the patch is missing.
 bool installInput();
+void inputTick();   // every frame: hooks the controller imports once the game has bound them
 
 }  // namespace mm

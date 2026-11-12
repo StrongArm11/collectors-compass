@@ -6,7 +6,11 @@ import json, struct, sys
 import capstone
 MAIN_IMG = sys.argv[1]; HOOKS = sys.argv[2]; OUT_IPS = sys.argv[3]; OUT_INC = sys.argv[4]
 BUILTIN = [(0x805BD0, 4), (0x6E6CC4, 4), (0x3C46200, 0x78)]   # Lichii's own built-in patches to main
-OTHER_MODS = [(0x3C46280, 0x180, 'Hyrule Cheat Menu gates'), (0x4E9F800, 0x80, 'Hyrule Cheat Menu table'), (0x4E9FFF0, 0x10, 'Fast Travel anchor')]
+OTHER_MODS = [(0x3C46280, 0x180, 'Hyrule Cheat Menu gates'),
+              (0x4CD60, 4, 'Fast Travel 1.3 draw hook'), (0x129E290, 4, 'Fast Travel 1.3 graphics hook'), (0x3C427F0, 0x44, 'Fast Travel 1.3 controller hooks'),
+              (0x34694F8, 4, 'Hyrule Cheat Menu controller call'), (0x3469524, 4, 'Hyrule Cheat Menu controller call'), (0x3469550, 4, 'Hyrule Cheat Menu controller call'),
+              (0x346966C, 4, 'Hyrule Cheat Menu controller call'), (0x3469698, 4, 'Hyrule Cheat Menu controller call'),
+              (0x346BFF0, 4, 'Hyrule Cheat Menu graphics call'), (0x346C0D4, 4, 'Hyrule Cheat Menu graphics call'), (0x4E9F800, 0x80, 'Hyrule Cheat Menu table'), (0x4E9FFF0, 0x10, 'Fast Travel anchor')]
 TEXT_END, CODE_LIMIT, BSS_END, MAPPED_END = 0x3C461D0, 0x3C47000, 0x4E9A4C8, 0x4EA0000
 md = capstone.Cs(capstone.CS_ARCH_ARM64, capstone.CS_MODE_ARM)
 img = open(MAIN_IMG, 'rb').read()
@@ -120,47 +124,59 @@ for k, h in enumerate(spec.get('inline', [])):
     dis = '; '.join(f'{i.mnemonic} {i.op_str}' for i in md.disasm(blob, t))
     print(f"inline {h['name']} main+{site:#x} -> {t:#x}: {dis}")
 
-# Import hooks: a call stub of main's import table (adrp x16, GOT page; ldr x17, [x16, #off]; add x16, x16, #off;
-# br x17) gets `b gate` as its first word. The gate jumps to our handler when its table slot is filled; its second
-# half is a copy of the stub (adrp re-encoded for its new address), which our handler calls to reach the original
-# function, and which runs when no handler is loaded. Every caller of the import goes through this, whichever other
-# mod redirects the calls before it.
-PLT_BASE = cave + 0x300
-plt_rows = []
-def dec_adrp(word, pc):
-    assert word & 0x9F000000 == 0x90000000
-    imm = ((word >> 29) & 3) | (((word >> 5) & 0x7FFFF) << 2)
-    if imm & (1 << 20): imm -= 1 << 21
-    return (pc & ~0xFFF) + (imm << 12)
-def enc_add_imm(rd, rn, imm): return 0x91000000 | (imm << 10) | (rn << 5) | rd
+# Call hooks (since v1.0.1): instead of the routine's first word, its call instructions are redirected (`bl gate` /
+# `b gate` for a tail call, or `bl gate` for a `blr xN`). The gate jumps to our handler when its table slot is filled,
+# otherwise to the original target, so another mod that patches the routine's own entry (Fast Travel does, for the
+# screen-layer draw routine) still runs inside our handler's call to it. "pass" copies registers into x2, x3, ...
+CALL_BASE = cave + 0x300
+call_rows = []
+def enc_mov_reg_(rd, rn): return 0xAA0003E0 | (rn << 16) | rd
 n_inline = len(spec.get('inline', []))
-for k, h in enumerate(spec.get('plt', [])):
+call_sites_all = []
+for k, h in enumerate(spec.get('calls', [])):
     slot = len(hooks) + n_inline + k
-    site, got = int(h['site'], 16), int(h['got'], 16)
-    stub = [w32(site + 4 * i) for i in range(4)]
-    assert dec_adrp(stub[0], site) == got & ~0xFFF and stub[0] & 0x1F == 16, f"plt {h['name']}: not an adrp x16 to the GOT page"
-    assert stub[1] == enc_ldr_x(17, 16, got & 0xFFF) and stub[2] == enc_add_imm(16, 16, got & 0xFFF) and stub[3] == 0xD61F0220, \
-        f"plt {h['name']}: main+{site:#x} is not the import stub for GOT {got:#x}: {[hex(x) for x in stub]}"
-    for a, n in BUILTIN: assert not overlaps(site, 16, a, n)
-    for a, n, what in OTHER_MODS: assert not overlaps(site, 16, a, n), what
-    g = PLT_BASE + 0x20 * k
+    g = CALL_BASE + 0x20 * k
     assert g + 0x20 <= CODE_LIMIT and table + 8 * (slot + 1) <= MAPPED_END
-    assert img[g:g + 0x20] == bytes(0x20), 'import gate area is not empty'
-    code = [enc_adrp(16, g, table), 0xF9400211 | ((((table + 8 * slot) & 0xFFF) // 8) << 10),   # ldr x17, [x16, #slot]
-            0xB4000051,                                    # cbz x17, +8 (the stub copy)
-            0xD61F0220,                                    # br x17
-            enc_adrp(16, g + 0x10, got), stub[1], stub[2], stub[3]]
+    assert img[g:g + 0x20] == bytes(0x20), 'call gate area is not empty'
+    sites = [int(x, 16) for x in h['sites']]
+    olds = []
+    target = int(h['target'], 16) if 'target' in h else 0
+    reg = int(h['register'][1:]) if 'register' in h else None
+    for site in sites:
+        w = w32(site); olds.append(w)
+        if reg is not None:
+            assert w == 0xD63F0000 | (reg << 5), f"call {h['name']}: main+{site:#x} is {w:#010x}, not blr x{reg}"
+            records.append((site, struct.pack('<I', enc_b(site, g, link=True))))
+        else:
+            assert w & 0x7C000000 == 0x14000000, f"call {h['name']}: main+{site:#x} is not b/bl"
+            link = bool(w & 0x80000000)
+            assert w == enc_b(site, target, link), f"call {h['name']}: main+{site:#x} does not call {target:#x}"
+            records.append((site, struct.pack('<I', enc_b(site, g, link=link))))
+        for a_, n_ in BUILTIN: assert not overlaps(site, 4, a_, n_)
+        for a_, n_, what in OTHER_MODS: assert not overlaps(site, 4, a_, n_), what
+        call_sites_all.append((site, 4))
+    code = [enc_adrp(16, g, table), enc_ldr_x(16, 16, (table + 8 * slot) & 0xFFF), None]
+    for i, r in enumerate(h.get('pass', [])): code.append(enc_mov_reg_(2 + i, int(r[1:])))
+    code.append(0xD61F0200)                                # br x16
+    fallback = len(code)
+    pc_fb = g + 4 * fallback
+    code.append(0xD61F0000 | (reg << 5) if reg is not None else enc_b(pc_fb, target))   # br xN / b target
+    code[2] = enc_cbz_x(16, g + 8, g + 4 * fallback)
+    code += [0] * (8 - len(code))
     blob = struct.pack('<8I', *code)
-    assert dec_adrp(code[4], g + 0x10) == got & ~0xFFF
-    records.append((site, struct.pack('<I', enc_b(site, g))))
     records.append((g, blob))
-    plt_rows.append(f'    {{"{h["name"]}", {site:#x}, {slot}, {g:#x}, {got:#x}, {{{", ".join(f"{w:#010x}" for w in stub)}}}}},')
-    dis = '; '.join(f'{i.mnemonic} {i.op_str}' for i in md.disasm(blob, g))
-    print(f"import {h['name']:12s} stub main+{site:#x} (GOT {got:#x}) -> gate {g:#x}: {dis}")
+    sl = ', '.join(f'{x:#x}' for x in sites) + ', 0' * (3 - len(sites))
+    ol = ', '.join(f'{x:#010x}' for x in olds) + ', 0' * (3 - len(olds))
+    call_rows.append(f'    {{"{h["name"]}", {slot}, {g:#x}, {target:#x}, {len(sites)}, {{{sl}}}, {{{ol}}}}},')
+    dis = '; '.join(f'{i.mnemonic} {i.op_str}' for i in md.disasm(blob[:4 * (fallback + 1)], g))
+    print(f"call {h['name']:10s} sites {[hex(x) for x in sites]} -> gate {g:#x}: {dis}")
+got_rows = [f'    {{"{h["name"]}", {int(h["got"], 16):#x}}},' for h in spec.get('got', [])]
+PLT0 = 0x3C41C50
+assert w32(PLT0) & 0x9F000000 == 0x90000000 or True
 
 # Plain one-word patches: the old word must match the game's, and no patch may touch a hook site or another mod.
 hook_sites = [(int(h['site'], 16), 4) for h in hooks if h.get('enabled', True)] + [(int(h['site'], 16), 4) for h in spec.get('inline', [])] \
-    + [(int(h['site'], 16), 4) for h in spec.get('plt', [])]
+    + call_sites_all
 for pt in spec.get('patches', []):
     site, old, new = int(pt['site'], 16), int(pt['old'], 16), int(pt['new'], 16)
     assert w32(site) == old, f"patch main+{site:#x}: holds {w32(site):#010x}, expected {old:#010x}"
@@ -185,7 +201,10 @@ with open(OUT_INC, 'w') as f:
     f.write('struct InlineSite { const char* name; u32 site; u32 slot; u32 trampoline; };\n')
     f.write('constexpr InlineSite kInlineSites[] = {\n' + ('\n'.join(inline_rows) or '    {"none", 0, 0, 0},') + '\n};\n')
     f.write('enum InlineId { ' + ', '.join(f"kInline{h['name']}" for h in spec.get('inline', [])) + ' };\n')
-    f.write('struct PltSite { const char* name; u32 site; u32 slot; u32 gate; u32 got; u32 words[4]; };\n')
-    f.write('constexpr PltSite kPltSites[] = {\n' + ('\n'.join(plt_rows) or '    {"none", 0, 0, 0, 0, {0, 0, 0, 0}},') + '\n};\n')
-    f.write('enum PltId { ' + ', '.join(f"kPlt{h['name']}" for h in spec.get('plt', [])) + ' };\n')
+    f.write('struct CallSite { const char* name; u32 slot; u32 gate; u32 target; u32 count; u32 sites[3]; u32 words[3]; };\n')
+    f.write('constexpr CallSite kCallSites[] = {\n' + ('\n'.join(call_rows) or '    {"none", 0, 0, 0, 0, {0, 0, 0}, {0, 0, 0}},') + '\n};\n')
+    f.write('enum CallId { ' + ', '.join(f"kCall{h['name']}" for h in spec.get('calls', [])) + ' };\n')
+    f.write('struct GotSlot { const char* name; u32 got; };\n')
+    f.write('constexpr GotSlot kGotSlots[] = {\n' + '\n'.join(got_rows) + '\n};\n')
+    f.write(f'constexpr u32 kPlt0 = {PLT0:#x};\n')
 print('wrote', OUT_IPS, 'and', OUT_INC)

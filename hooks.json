@@ -1,12 +1,12 @@
 {
-  "_comment": "Hooked game routines and plain patches (offsets in main, build E0F3CCFA...). Each enabled hook's first word is replaced by a branch to a gate in unused space at the end of main's code; the gate jumps to our handler when the module has filled its table slot, otherwise it runs the original first word and continues. Disabled hooks keep their slot but patch nothing. Overlay sites from Fast Travel's game.hpp (MIT), checked against the dump. Import hooks (plt) wrap calls into the system libraries through main's import stubs.",
+  "_comment": "Hooked game routines and plain patches (offsets in main, build E0F3CCFA...). Each enabled hook's first word is replaced by a branch to a gate in unused space at the end of main's code; the gate jumps to our handler when the module has filled its table slot, otherwise it runs the original first word and continues. Disabled hooks keep their slot but patch nothing. Overlay sites from Fast Travel's game.hpp (MIT), checked against the dump. Since v1.0.1 the controller is hooked through main's import table entries (the \"got\" list, changed at run time) and the drawing through the callers (\"calls\"), so nothing here touches the sites Fast Travel and Hyrule Cheat Menu patch.",
   "cave": "0x3C46C00",
   "table": "0x4E9E000",
   "hooks": [
     {
       "name": "LoadGraphicsProcs",
-      "enabled": true,
-      "what": "graphics function table load: (device, lookup)",
+      "enabled": false,
+      "what": "graphics function table load: (device, lookup) [off since v1.0.1: Fast Travel patches this entry; see \"calls\"]",
       "site": "0x129E290",
       "words": [
         "0xD503237F",
@@ -17,8 +17,8 @@
     },
     {
       "name": "DrawLayer",
-      "enabled": true,
-      "what": "draws one screen layer: (display, layer, sort key)",
+      "enabled": false,
+      "what": "draws one screen layer: (display, layer, sort key) [off since v1.0.1: Fast Travel patches this entry; see \"calls\"]",
       "site": "0x4CD60",
       "words": [
         "0xD503237F",
@@ -101,35 +101,49 @@
       }
     }
   ],
-  "plt": [
+  "calls": [
+    {
+      "name": "DrawLayer",
+      "what": "the three calls of the screen-layer draw routine (main+0x4CD60): (display, layer, sort key). Hooked at the callers so a mod that patches the routine's own entry (Fast Travel) still runs inside it.",
+      "target": "0x4CD60",
+      "sites": [
+        "0x6182C",
+        "0x63EF0",
+        "0x635C8"
+      ]
+    },
+    {
+      "name": "DeviceInit",
+      "what": "the renderer's nvnDeviceInitialize call (blr x24, with x23 = nvnDeviceGetProcAddress): handler(device, builder, initialize, getProcAddress)",
+      "register": "x24",
+      "pass": [
+        "x24",
+        "x23"
+      ],
+      "sites": [
+        "0x346C0C0"
+      ]
+    }
+  ],
+  "got": [
     {
       "name": "NpadJoyDual",
-      "what": "nn::hid::GetNpadStates(NpadJoyDualState*, int, const NpadIdType&)",
-      "site": "0x3C427F0",
       "got": "0x4CBF5C0"
     },
     {
       "name": "NpadFullKey",
-      "what": "nn::hid::GetNpadStates(NpadFullKeyState*, int, const NpadIdType&)",
-      "site": "0x3C42800",
       "got": "0x4CBF5C8"
     },
     {
       "name": "NpadJoyLeft",
-      "what": "nn::hid::GetNpadStates(NpadJoyLeftState*, int, const NpadIdType&)",
-      "site": "0x3C42810",
       "got": "0x4CBF5D0"
     },
     {
       "name": "NpadJoyRight",
-      "what": "nn::hid::GetNpadStates(NpadJoyRightState*, int, const NpadIdType&)",
-      "site": "0x3C42820",
       "got": "0x4CBF5D8"
     },
     {
       "name": "NpadHandheld",
-      "what": "nn::hid::GetNpadStates(NpadHandheldState*, int, const NpadIdType&)",
-      "site": "0x3C42830",
       "got": "0x4CBF5E0"
     }
   ]

@@ -177,15 +177,33 @@ int onGetStates(NpadState* states, int count, const u32* id) {
 
 }  // namespace
 
+// The controller is hooked through main's import table: each GetNpadStates entry is pointed at our handler, which
+// calls what was there before. Whatever another mod puts in front of the import (Fast Travel patches the import
+// stubs, Hyrule Cheat Menu the calls) then runs before us, and we run before the system. The entries are filled
+// lazily the first time the game reads a controller, so inputTick (called every frame) takes each one over once it
+// holds a real address.
+namespace {
+const GetStatesFn kHandlers[kStyles] = {&onGetStates<0>, &onGetStates<1>, &onGetStates<2>, &onGetStates<3>, &onGetStates<4>};
+}
+
 bool installInput() {
-    void* handlers[kStyles] = {reinterpret_cast<void*>(&onGetStates<0>), reinterpret_cast<void*>(&onGetStates<1>),
-                               reinterpret_cast<void*>(&onGetStates<2>), reinterpret_cast<void*>(&onGetStates<3>),
-                               reinterpret_cast<void*>(&onGetStates<4>)};
-    const PltId ids[kStyles] = {kPltNpadJoyDual, kPltNpadFullKey, kPltNpadJoyLeft, kPltNpadJoyRight, kPltNpadHandheld};
-    bool all = true;
-    for (int i = 0; i < kStyles; ++i)
-        all = installPlt(ids[i], handlers[i], reinterpret_cast<void**>(&s_original[i])) && all;
-    return all;
+    log("controller: hooked through the import table once the game has read a controller");
+    return true;
+}
+
+void inputTick() {
+    if (g_main == 0) return;
+    const u64 plt0 = g_main + kPlt0;
+    for (int i = 0; i < kStyles; ++i) {
+        u64* entry = reinterpret_cast<u64*>(g_main + kGotSlots[i].got);
+        const u64 now = __atomic_load_n(entry, __ATOMIC_ACQUIRE);
+        const u64 ours = reinterpret_cast<u64>(kHandlers[i]);
+        if (now == ours || now == 0 || now == plt0) continue;
+        __atomic_store_n(reinterpret_cast<u64*>(&s_original[i]), now, __ATOMIC_RELEASE);
+        u64 expected = now;
+        if (!__atomic_compare_exchange_n(entry, &expected, ours, false, __ATOMIC_ACQ_REL, __ATOMIC_ACQUIRE)) continue;
+        log("controller import %s hooked (calls on to %p)", kGotSlots[i].name, reinterpret_cast<void*>(now));
+    }
 }
 
 }  // namespace mm

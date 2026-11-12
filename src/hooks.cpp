@@ -60,30 +60,24 @@ bool installInline(InlineId id, void* handler) {
 
 namespace mm {
 
-bool installPlt(PltId id, void* handler, void** original) {
-    const PltSite& h = kPltSites[id];
-    const auto* site = reinterpret_cast<const volatile u32*>(g_main + h.site);
-    const u32 branch = 0x14000000u | (((h.gate - h.site) >> 2) & 0x3FFFFFFu);
-    if (site[0] != branch) {
-        log("import hook %s: main+%x holds %08x, not the patch's branch (is the .ips file installed?); hook off", h.name,
-            h.site, site[0]);
-        return false;
-    }
-    for (int i = 1; i < 4; ++i) {
-        if (site[i] != h.words[i]) {
-            log("import hook %s: main+%x word %d is %08x, expected %08x; hook off", h.name, h.site, i, site[i], h.words[i]);
+bool installCall(CallId id, void* handler, void** original) {
+    const CallSite& h = kCallSites[id];
+    for (u32 i = 0; i < h.count; ++i) {
+        const u32 site = h.sites[i];
+        const u32 old = h.words[i];
+        const bool link = (old & 0xFC000000u) == 0x94000000u || (old & 0xFFFFFC1Fu) == 0xD63F0000u;   // bl or blr
+        const u32 branch = (link ? 0x94000000u : 0x14000000u) | (((h.gate - site) >> 2) & 0x3FFFFFFu);
+        const u32 now = *reinterpret_cast<const volatile u32*>(g_main + site);
+        if (now != branch) {
+            log("call hook %s: main+%x holds %08x, not the patch's branch (is the .ips file installed?); hook off", h.name,
+                site, now);
             return false;
         }
     }
-    const auto* gate = reinterpret_cast<const volatile u32*>(g_main + h.gate);
-    if (gate[5] != h.words[1] || gate[6] != h.words[2] || gate[7] != h.words[3]) {
-        log("import hook %s: its gate does not hold the stub copy; hook off", h.name);
-        return false;
-    }
-    *original = const_cast<u32*>(gate + 4);
+    if (original != nullptr) *original = h.target != 0 ? reinterpret_cast<void*>(g_main + h.target) : nullptr;
     __atomic_store_n(reinterpret_cast<u64*>(g_main + kHookTable + h.slot * 8), reinterpret_cast<u64>(handler),
                      __ATOMIC_RELEASE);
-    log("import hook %s at main+%x installed", h.name, h.site);
+    log("call hook %s installed (%u call%s)", h.name, h.count, h.count == 1 ? "" : "s");
     return true;
 }
 

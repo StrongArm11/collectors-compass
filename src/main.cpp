@@ -47,7 +47,7 @@ extern "C" __attribute__((used, visibility("default"))) void oot_minimap_init() 
         return;
     }
     g_main = base;
-    log("Collector's Compass started (map icons, settings menu, hints), game code at %p", reinterpret_cast<void*>(base));
+    log("Collector's Compass 1.0.1 started (map icons, settings menu, hints), game code at %p", reinterpret_cast<void*>(base));
     if (installResources()) log("map icon pictures will be patched as the game loads its UI archives");
     if (installIcons()) log("icon watcher ready; missing Skulltulas and hearts should show on the minimap");
     const bool drawing = installOverlay();

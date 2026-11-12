@@ -42,7 +42,9 @@ folder, delete that `romfs` folder: it is no longer needed.
 ## Compatibility
 
 - **Uses `subsdk9`.** Another mod that also ships a `subsdk9` can't be used at the same time.
-- **Hyrule Cheat Menu** and **Fast Travel**: the game starts and runs with all three installed, and this mod's features were tested that way (the other two mods' own features were not re-tested).
+- **Hyrule Cheat Menu** and **Fast Travel (v1.3)**: tested with all three installed; all three menus work, whatever the
+  mod folders are called. (v1.0.0 clashed with Fast Travel v1.3: whichever of the two loaded last turned the other's
+  menu off. Update to v1.0.1 if you use both.)
 - **Memory**: the game sizes its main memory at start-up from what the loaded mods leave free, and won't start
   ("Almost ready..." forever) if mods take too much. This mod reserves very little at start-up (about 0.35 MB) and
   takes its panel images (2 to 8 MB, depending on the screen) from the game's own spare heap later. With Hyrule
@@ -52,18 +54,6 @@ folder, delete that `romfs` folder: it is no longer needed.
   clash with this one. Use one or the other.
 - **Screens**: tested docked (2560x1440) and handheld (1920x1080), with and without Lichii's Max Resolution patch,
   and at 1x, 1.5x and 3x resolution scale.
-
-  HOW TO INSTALL
-1. Download Collectors-Compass-v1.0.0.zip and unzip it. You get a folder named Collectors-Compass.
-2. Close the game.
-3. In Lichii, right-click Ocarina of Time in your game list and choose Open Mod Data Location.
-4. Copy the whole Collectors-Compass folder into the window that opens. Inside it, exefs must hold subsdk9 and E0F3CCFAF50065AE4EA01EB5AEB13B1A45DA3348.ips.
-5. If you've turned mods off in the game's add-on settings, make sure Collectors-Compass is on. Turn off any other mod that also uses subsdk9.
-6. Start the game. On the pause map, press L + R together to open the settings; tilt the right stick to pick an icon for hints.
-
-TO UNINSTALL: close the game and delete the Collectors-Compass folder.
-
-Needs game version 1.1.1 (build ID E0F3CCFAF50065AE4EA01EB5AEB13B1A45DA3348).
 
 ## Known limits
 

@@ -3,8 +3,9 @@
 // the returned original runs the routine's first word and continues inside the routine.
 // Inline hooks replace one instruction inside a routine with a branch to a trampoline that calls our handler and
 // branches on its result (see tools/make_patch.py); installInline fills their table slots.
-// Import hooks replace the first word of one of main's import stubs (calls into the system libraries) with a branch
-// to a gate; installPlt fills its slot and returns the gate's copy of the stub, which calls the real import.
+// Call hooks (since v1.0.1) redirect a routine's call instructions to a gate instead of patching the routine itself,
+// so another mod that patches the routine's entry still runs; installCall fills the gate's slot and returns the
+// routine's address (or nothing for a call through a register, whose target the gate passes to the handler).
 #pragma once
 
 #include "common.hpp"
@@ -14,6 +15,6 @@ namespace mm {
 
 bool installHook(HookId id, void* handler, void** original);
 bool installInline(InlineId id, void* handler);
-bool installPlt(PltId id, void* handler, void** original);
+bool installCall(CallId id, void* handler, void** original);
 
 }  // namespace mm
