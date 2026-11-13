@@ -50,7 +50,7 @@ folder, delete that `romfs` folder: it is no longer needed.
 - **Uses `subsdk9`.** Another mod that also ships a `subsdk9` can't be used at the same time.
 - **Hyrule Cheat Menu** and **Fast Travel (v1.3)**: tested with all three installed; all three menus work, whatever the
   mod folders are called. (v1.0.0 clashed with Fast Travel v1.3: whichever of the two loaded last turned the other's
-  menu off. Update to v1.0.1 if you use both.)
+  menu off. Use v1.0.1 or later if you use both.)
 - **Memory**: the game sizes its main memory at start-up from what the loaded mods leave free, and won't start
   ("Almost ready..." forever) if mods take too much. This mod reserves very little at start-up (about 0.35 MB) and
   takes its panel images (2 to 8 MB, depending on the screen) from the game's own spare heap later. With Hyrule
@@ -67,6 +67,8 @@ folder, delete that `romfs` folder: it is no longer needed.
 - The Gerudo Training Ground sign on the adult Gerudo's Fortress map shows a silver rupee (the mod uses that
   picture for Silver Rupee rooms).
 - "Only what I can get now" for Big Poes checks adult, the Fairy Bow and a bottle; it doesn't check for Epona.
+- "Only what I can get now" checks items and songs, including what an area needs to get in, but not story events
+  (Zelda's Letter, Ruto's Letter, rescuing the carpenters) or Din's Fire.
 - Big Poe icons were checked in game on the Hyrule Field map. Silver Rupee room icons were tested on other maps;
   their exact spots in the dungeons have not been seen in game yet.
 

@@ -123,10 +123,14 @@ void paintHint(Canvas& c) {
     if (info.need[0] != 0) formatText(foot, sizeof(foot), "Needs: %s", info.need);
     else if (info.id[0] != 0) formatText(foot, sizeof(foot), "Needs nothing special");
     else foot[0] = 0;
-    c.text(pad, h - 16, 20, foot, kSub, kBg);
     char nav[48];
     formatText(nav, sizeof(nav), "%d of %d   R stick: next", info.position, info.total);
-    c.text(w - pad - Canvas::textWidth(nav, 20), h - 16, 20, nav, kSub, kBg);
+    const float navWidth = Canvas::textWidth(nav, 20);
+    const float room = w - 2 * pad - navWidth - 24;   // a long "Needs" line gets smaller type, then "..." at the end
+    float size = 20;
+    while (size > 15 && Canvas::textWidth(foot, size) > room) size -= 1;
+    drawWrapped(c, pad, h - 16, 20, room, size, foot, kSub, kBg, 1);
+    c.text(w - pad - navWidth, h - 16, 20, nav, kSub, kBg);
 }
 
 }  // namespace

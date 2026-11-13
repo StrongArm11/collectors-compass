@@ -25,6 +25,11 @@ ITEMFLAG = {   # tool -> IsGet flags (any)   (same table as the overlay's gen_it
     'Fire Arrows': ['IsGet.Item_Arrow_Fire'], 'Fairy Bow': ['IsGet.Weapon_Range_Bow'],
     'Ocarina': ['IsGet.Item_Ocarina_Fairy', 'IsGet.Item_Ocarina_Time'], 'Deku Stick': ['IsGet.Item_DekuStick'],
     'Magic Bean': ['IsGet.Item_MagicBean'],
+    'Hover Boots': ['IsGet.Armor_Adult_HoverBoot'], 'Silver Scale': ['IsGet.Item_Scale_Silver', 'IsGet.Item_Scale_Gold'],
+    "Goron's Bracelet": ['IsGet.Armor_Child_Gauntlet_Goron', 'IsGet.Armor_Adult_Gauntlet_Silver', 'IsGet.Armor_Adult_Gauntlet_Gold'],
+    'Nocturne of Shadow': ['IsGet.Item_Melody_ShadowNocturne'], "Epona's Song": ['IsGet.Item_Melody_EponaSong'],
+    'Goron Tunic': ['IsGet.Armor_Adult_Goron'], 'Zora Tunic': ['IsGet.Armor_Adult_Zora'],
+    'Gerudo Membership Card': ['IsGet.Item_Token_Gerudo'],
 }
 ALWAYS = {'Cucco', 'Small Key', 'Boss Key', 'Sword', 'Baby Dodongo blast', 'Bomb Flower'}
 BOTTLE_HS = CATS['it']['rows'][[r['desc'] for r in CATS['it']['rows']].index('Bottle 1')]['det']['hs']
@@ -104,8 +109,51 @@ for r in CATS['sr']['rows']:                         # Silver Rupee rooms (cat 3
                           need=need_text(r.get('age'), r.get('time'), r.get('tools')),
                           floor=floor_index(banc, fl[0]) if fl and 'FloorNum' in MP.get(banc, {}) else NO_FLOOR,
                           toks=[int(h, 16) for h in r['det']['hs']], notes=r.get('notes', '')))
-STEPS = json.load(open(os.path.join(SP, 'mod', 'data', 'steps.json'))) if os.path.exists(os.path.join(SP, 'mod', 'data', 'steps.json')) else {}
+STEPS_PATH = os.environ.get('STEPS') or os.path.join(SP, 'mod', 'data', 'steps.json')
+STEPS = json.load(open(STEPS_PATH)) if os.path.exists(STEPS_PATH) else {}
 missing_steps = sorted(set(i['id'] for i in items if i['id'] not in STEPS))
+
+# Getting into the area: what the whole area (or dungeon) needs before any of its collectibles can be reached.
+# Rules per area and the ages they apply to (reqAge: 0 either, 1 child, 2 adult, 3 child then adult, 4 plant/ride);
+# added to the item's own needs unless an existing need already implies it.
+ADULTISH, CHILD, ALL = (0, 2, 3, 4), (1,), (0, 1, 2, 3, 4)
+AREA_ACCESS = [
+    ('Death Mountain Crater', ADULTISH, ['Hookshot']),                     # (user, in game): the crater is off limits without it
+    ('Fire Temple', ALL, ['Hookshot|Bolero of Fire', 'Goron Tunic']),
+    ("Zora's Domain", CHILD, ["Zelda's Lullaby|Silver Scale"]), ("Zora's Domain", ADULTISH, ["Zelda's Lullaby"]),
+    ("Zora's Fountain", CHILD, ["Zelda's Lullaby|Silver Scale"]), ("Zora's Fountain", ADULTISH, ["Zelda's Lullaby"]),
+    ("Jabu-Jabu's Belly", ALL, ["Zelda's Lullaby|Silver Scale"]),
+    ('Ice Cavern', ALL, ["Zelda's Lullaby"]),
+    ('Water Temple', ALL, ['Iron Boots', 'Hookshot', 'Zora Tunic']),
+    ('Bottom of the Well', ALL, ['Song of Storms']),
+    ('Shadow Temple', ALL, ['Nocturne of Shadow', 'Hover Boots']),
+    ("Dodongo's Cavern", CHILD, ["Bombs|Goron's Bracelet"]), ("Dodongo's Cavern", ADULTISH, ["Bombs|Megaton Hammer|Goron's Bracelet"]),
+    ("Gerudo's Fortress", ADULTISH, ["Epona's Song|Longshot"]),
+    ('Haunted Wasteland', ALL, ["Epona's Song|Longshot", 'Gerudo Membership Card', 'Longshot|Hover Boots']),
+    ('Desert Colossus', CHILD + (4,), ['Requiem of Spirit']), ('Desert Colossus', (0, 2, 3), ['Requiem of Spirit|Longshot|Hover Boots']),
+    ('Spirit Temple', CHILD, ['Requiem of Spirit']), ('Spirit Temple', ADULTISH, ['Requiem of Spirit|Longshot|Hover Boots', 'Silver Gauntlets']),
+]
+ID_ACCESS = {'GER-3': ["Epona's Song|Longshot"], 'GER-4': ["Epona's Song|Longshot"],   # far side of the broken bridge
+             'H-GFT2': ["Epona's Song"]}                                              # horseback archery
+def access_for(it):
+    out = [g for area, ages, gs in AREA_ACCESS if area == it['area'] and it['reqAge'] in ages for g in gs]
+    return out + ID_ACCESS.get(it['id'], [])
+added = 0
+for it in items:
+    extra = []
+    cand = groups_of(';'.join(access_for(it)))
+    for i, (name, hs) in enumerate(cand):   # skip one already needed, or implied by something stricter
+        others = it['groups'] + extra + cand[i + 1:]
+        if any(set(h) <= set(hs) for _, h in others): continue
+        extra.append((name, hs))
+    it['access'] = [n for n, _ in extra]
+    if extra:
+        added += 1
+        it['groups'] = extra + it['groups']
+        head, sep, rest = it['need'].partition(' {B} ')
+        known = head in AGE_TEXT.values() and head != ''
+        acc = ' {B} '.join(it['access'])
+        it['need'] = (head + ' {B} ' + acc + (sep + rest if rest else '')) if known else (acc + (' {B} ' + it['need'] if it['need'] else ''))
 
 bancs = sorted(set(i['banc'] for i in items))
 flags, gdefs, rows, toks = [], [], [], []
@@ -114,7 +162,8 @@ for it in items:
     for name, hs in it['groups']:
         gdefs.append((name, len(flags), len(hs))); flags += hs
     t0 = len(toks); toks += it.get('toks', [])
-    steps = STEPS.get(it['id'], [])
+    steps = list(STEPS.get(it['id'], []))
+    if it.get('access'): steps[1:1] = ['Getting there needs: ' + ', '.join(it['access']) + '.']
     rows.append('    {%d, %d, %d, %d, %d, %d, %d, 0x%016xULL, %d, 0x%016xULL, %.2ff, %.2ff, %.2ff, %s, %s, %s, %s, %d, %d, %d, %s},' % (
         it['cat'], bancs.index(it['banc']), it['age'], it['reqAge'], it['night'], g0, len(it['groups']), it['key'],
         it['op'], it['val'], it['x'], it['y'], it['z'], cstr(it['id']), cstr(it['desc']), cstr(it['area']), cstr(it['need']),
@@ -139,4 +188,4 @@ with open(OUT, 'w') as f:
     f.write('constexpr int kItemCount = %d;\n' % len(items))
     f.write('}  // namespace mm::data\n')
 from collections import Counter
-print('steps missing for', len(missing_steps), missing_steps[:8]); print('items', len(items), dict(Counter(i['cat'] for i in items)), 'bancs', len(bancs), 'groups', len(gdefs), 'flags', len(flags))
+print('items with area needs added', added); print('steps missing for', len(missing_steps), missing_steps[:8]); print('items', len(items), dict(Counter(i['cat'] for i in items)), 'bancs', len(bancs), 'groups', len(gdefs), 'flags', len(flags))

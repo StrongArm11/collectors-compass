@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.2 - 2026-11-12
+
+- The House of Skulltula's Piece of Heart (H-KAK4) now stays hidden until you have 50 Gold Skulltula tokens.
+- Big Poe hints: the Poe Collector gives the bottle for five Big Poes in this version, not ten.
+- Zora's River Pieces of Heart (H-ZRV1, H-ZRV2): corrected the directions. The pillar piece is easiest with the
+  Boomerang; there are no vines to climb with the Cucco.
+- Collectibles now also need what it takes to get into their area or dungeon, for "only what I can get now" and
+  the hint panel. For example: the Hookshot for Death Mountain Crater (adult), Zelda's Lullaby (or the Silver Scale as
+  a child) for Zora's Domain, Zora's Fountain, Jabu-Jabu's Belly and the Ice Cavern, the Song of Storms for the Bottom
+  of the Well, the Nocturne of Shadow and Hover Boots for the Shadow Temple, the Requiem of Spirit for the child side
+  of the Spirit Temple, the Goron Tunic for the Fire Temple and the Zora Tunic for the Water Temple. The hint steps
+  say what getting there needs; a long "Needs" line now gets smaller type so it fits.
+
 ## v1.0.1 - 2026-11-12
 
 Fix: works alongside Fast Travel v1.3.

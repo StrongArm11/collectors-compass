@@ -152,6 +152,23 @@ Got collected(const data::Item& it) {
     return kUnknown;
 }
 
+// Gold Skulltula tokens Link has: each tracked Skulltula counted once (some are listed for both the child and the
+// adult map with the same save key).
+int skulltulasGot() {
+    int n = 0;
+    for (int i = 0; i < data::kItemCount; ++i) {
+        const auto& it = data::kItems[i];
+        if (it.cat != 0) continue;
+        bool seen = false;
+        for (int j = 0; j < i && !seen; ++j) seen = data::kItems[j].cat == 0 && data::kItems[j].key == it.key;
+        if (!seen && gameKey(it.val)) ++n;
+    }
+    return n;
+}
+
+// Rewards that only exist once Link has enough tokens: the House of Skulltula's Piece of Heart (50 tokens).
+int tokensNeeded(const data::Item& it) { return sameText(it.id, "H-KAK4") ? 50 : 0; }
+
 // Can Link get this now? Points why at the first thing missing.
 bool canGetNow(const data::Item& it, const char** why) {
     *why = "";
@@ -199,7 +216,9 @@ void refresh(Cache& c, std::uintptr_t mgr, bool listChanged) {
         } else if (ks != nullptr && c.item[i] >= 0) {
             const auto& it = data::kItems[c.item[i]];
             got = collected(it);
+            const int needTokens = tokensNeeded(it);
             if (got == kCollected) { d = ks->showCollected ? kShow : kHide; why = "collected"; }
+            else if (needTokens > 0 && skulltulasGot() < needTokens) { d = kHide; why = "needs 50 Gold Skulltula tokens"; }
             else if (got == kMissing) d = (ks->onlyNow && !canGetNow(it, &why)) ? kHide : kShow;
             else if (ks->onlyNow && !canGetNow(it, &why)) d = kHide;   // unknown: the game's rule, unless out of reach
         }
